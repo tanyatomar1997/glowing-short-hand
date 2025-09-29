@@ -1,29 +1,33 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+require "rswag/specs"
 
 RSpec.configure do |config|
-  # Where Swagger JSON files will be generated
-  config.swagger_root = Rails.root.join('swagger').to_s
-
-  # Define Swagger documents and global metadata
-  config.swagger_docs = {
-    'v1/swagger.yaml' => {
-      openapi: '3.0.1',
+  config.openapi_root = Rails.root.join("swagger").to_s
+  config.openapi_specs = {
+    "v1/swagger.yaml" => {
+      openapi: "3.0.1",
       info: {
-        title: 'Short URL API',
-        version: 'v1'
+        title: "API V1",
+        version: "v1"
       },
+      components: {
+        securitySchemes: {
+          BearerAuth: {
+            type: :http,
+            scheme: :bearer,
+            bearerFormat: "Opaque"
+          }
+        }
+      },
+      security: [{BearerAuth: []}],
       paths: {},
       servers: [
-        {
-          url: '/',
-          description: 'Local server'
-        }
+        {url: "/", description: "Server"}
       ]
     }
   }
 
-  # Format of output (yaml)
-  config.swagger_format = :yaml
+  config.openapi_format = :yaml
 end

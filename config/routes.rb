@@ -23,6 +23,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      resources :tokens, only: [:create, :destroy]
       resources :short_urls, controller: "urls", only: [:create, :index]
     end
   end

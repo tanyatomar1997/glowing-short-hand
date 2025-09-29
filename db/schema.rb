@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_09_29_080331) do
+ActiveRecord::Schema[8.0].define(version: 2025_09_29_132520) do
+  create_table "api_keys", force: :cascade do |t|
+    t.string "access_token"
+    t.string "secret_key"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["access_token"], name: "index_api_keys_on_access_token", unique: true
+    t.index ["secret_key"], name: "index_api_keys_on_secret_key", unique: true
+  end
+
   create_table "short_urls", force: :cascade do |t|
     t.text "original_url"
     t.string "slug"

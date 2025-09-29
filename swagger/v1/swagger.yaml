@@ -1,10 +1,15 @@
 openapi: 3.0.1
 info:
-  title: Short URL API
+  title: API V1
   version: v1
-servers:
-  - url: http://localhost:3000
-    description: Local server
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: Opaque
+security:
+- BearerAuth: []
 paths:
   /api/v1/short_urls:
     post:

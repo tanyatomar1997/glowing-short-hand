@@ -1,6 +1,6 @@
 module Api
   module V1
-    class UrlsController < ActionController::API
+    class UrlsController < BaseController
       before_action :find_original_url, only: :create
 
       def create
