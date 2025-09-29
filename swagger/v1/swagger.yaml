@@ -1,0 +1,73 @@
+openapi: 3.0.1
+info:
+  title: Short URL API
+  version: v1
+servers:
+  - url: http://localhost:3000
+    description: Local server
+paths:
+  /api/v1/short_urls:
+    post:
+      summary: Create a short URL
+      tags:
+        - ShortUrls
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                original_url:
+                  type: string
+                  example: "https://example.com"
+              required:
+                - original_url
+      responses:
+        '200':
+          description: Short URL created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  short_url:
+                    type: string
+                    example: "http://localhost:3000/abc123"
+                  original_url:
+                    type: string
+                    example: "https://example.com"
+        '422':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+    get:
+      summary: Retrieve all shortened URLs
+      tags:
+        - ShortUrls
+      responses:
+        '200':
+          description: A list of all URLs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    original_url:
+                      type: string
+                      example: "https://example.com"
+                    short_code:
+                      type: string
+                      example: "abc123"
+                    short_url:
+                      type: string
+                      example: "http://localhost:3000/abc123"
