@@ -26,6 +26,4 @@ Rails.application.routes.draw do
       resources :short_urls, controller: "urls", only: [:create, :index]
     end
   end
-
-  get "/:code", to: "urls#show", as: :short
 end
